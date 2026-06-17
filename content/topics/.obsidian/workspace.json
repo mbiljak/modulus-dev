@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "11abc3d7bcd0a606",
+    "type": "split",
+    "children": [
+      {
+        "id": "4b7038252fa33479",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5a367d907b685660",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "0b7dd48e2be65b66",
+    "type": "split",
+    "children": [
+      {
+        "id": "75cba68a859bc365",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4c9997157375f2dc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "702be807a5ace03e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "4795c8351f0b5c05",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "d55ea585ff0d9fc2",
+    "type": "split",
+    "children": [
+      {
+        "id": "63450b7f90f3d45c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "38d8238d1ad6916e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "e8b93deae35e259a",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "89bf8ccd257529ec",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "97b455a362160bdd",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "f92389a91d45edea",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "4c9997157375f2dc",
+  "lastOpenFiles": [
+    "memory-and-bus/03-bit-banding.md",
+    "memory-and-bus/02-bus-interfaces-ahb-apb.md",
+    "memory-and-bus/01-memory-regions.md",
+    "c-and-assembly/04-gcc-attributes.md",
+    "c-and-assembly/03-naked-functions.md",
+    "c-and-assembly/02-mixed-c-and-assembly.md",
+    "c-and-assembly/01-inline-assembly-basics.md",
+    "arm-architecture/04-memory-map.md",
+    "arm-architecture/03-registers-and-banked-stack.md",
+    "arm-architecture/02-processor-modes-and-access-levels.md",
+    "arm-architecture/01-cortex-m-overview.md",
+    "memory-and-bus/_meta.json",
+    "c-and-assembly/_meta.json",
+    "arm-architecture/_meta.json",
+    "memory-and-bus",
+    "c-and-assembly",
+    "arm-architecture",
+    "spi copy/_meta.json",
+    "spi copy/01-spi-overview.mdx",
+    "spi copy"
+  ]
+}
