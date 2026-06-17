@@ -2,36 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════
+   Vauxhall Indigo — dark theme, standard intensity
+   Mirrors .vauxhall-indigo.theme-dark.intensity-standard
+   with the default headers-gradient-cyan-to-purple heading style.
+   ═══════════════════════════════════════════════════════════════ */
+
 :root {
-  /* Backgrounds — Vauxhall-inspired navy/purple scale */
-  --color-bg-base:       #0d0e17;
-  --color-bg-surface:    #13141f;
-  --color-bg-elevated:   #1a1b2e;
-  --color-bg-overlay:    #22243a;
-  --color-bg-subtle:     #2a2d4a;
+  /* ── Vauxhall source values (Indigo / Standard) ─────────── */
+  --hue-bg: 238;
+  --sat-bg: 60%;
+  --lum:    11%;
+  --hue-fg: 255;
+  --sat-fg: 100%;
 
-  /* Purple accent scale */
-  --color-accent-base:   #7c5cbf;
-  --color-accent-bright: #a78bfa;
-  --color-accent-pop:    #c4b5fd;
-  --color-accent-glow:   #ddd6fe;
+  --vauxhall-bg: hsl(var(--hue-bg), var(--sat-bg), var(--lum));
+  --vauxhall-fg: hsl(var(--hue-fg), var(--sat-fg), 80%);
 
-  /* Text */
-  --color-text-primary:   #e8e6f0;
-  --color-text-secondary: #a8a4bc;
-  --color-text-muted:     #6b6880;
+  /* ── Background scale ──────────────────────────────────── */
+  /* matches Vauxhall's --color-base-* ladder */
+  --color-base-00: color-mix(in srgb, var(--vauxhall-bg) 25%, #000);
+  --color-base-05: color-mix(in srgb, var(--vauxhall-bg) 40%, #000);
+  --color-base-10: color-mix(in srgb, var(--vauxhall-bg) 50%, #000);
+  --color-base-20: color-mix(in srgb, var(--vauxhall-bg) 80%, #000);
+  --color-base-25: color-mix(in srgb, var(--vauxhall-bg) 80%, #000);
+  --color-base-30: color-mix(in srgb, var(--vauxhall-bg) 90%, var(--vauxhall-fg));
+  --color-base-35: color-mix(in srgb, var(--vauxhall-bg) 95%, var(--vauxhall-fg));
+  --color-base-40: color-mix(in srgb, var(--vauxhall-bg) 80%, var(--vauxhall-fg));
+  --color-base-70: color-mix(in srgb, var(--vauxhall-bg) 30%, var(--vauxhall-fg));
+  --color-base-100: var(--vauxhall-fg);
 
-  /* Border */
-  --color-border: #2a2d4a;
+  /* ── Vauxhall spectrum ─────────────────────────────────── */
+  --mint:       #52eea3;
+  --cyan:       #51e1e9;
+  --cool-cyan:  #43cfea;
+  --light-blue: #54b6f8;
+  --blue:       #437cf3;
+  --blue-violet:#6f51f4;
+  --violet:     #9446f8;
+  --purple:     #c952ed;
+  --magenta:    #e54f9b;
+  --hot-red:    #e3365e;
 
-  /* Typography */
+  /* ── Heading gradient: Cyan → Purple (Vauxhall default) ── */
+  --h1-color: var(--cool-cyan);
+  --h2-color: var(--light-blue);
+  --h3-color: var(--blue);
+  --h4-color: var(--blue-violet);
+  --h5-color: var(--violet);
+  --h6-color: var(--purple);
+
+  /* ── Text ─────────────────────────────────────────────── */
+  --text-normal:    color-mix(in srgb, var(--vauxhall-fg) 30%, #fff);
+  --text-secondary: var(--color-base-70);
+  --text-muted:     var(--color-base-40);
+
+  /* ── Site design tokens (referenced by Tailwind + components) ── */
+  --color-bg-base:      var(--color-base-00);
+  --color-bg-surface:   var(--color-base-05);
+  --color-bg-elevated:  var(--color-base-10);
+  --color-bg-overlay:   var(--color-base-20);
+  --color-bg-subtle:    var(--color-base-30);
+
+  --color-accent-base:   var(--vauxhall-fg);
+  --color-accent-bright: var(--light-blue);
+  --color-accent-pop:    var(--cool-cyan);
+  --color-accent-glow:   var(--mint);
+
+  --color-text-primary:   var(--text-normal);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:     var(--text-muted);
+  --color-border:         var(--color-base-30);
+
+  /* ── Typography ─────────────────────────────────────────── */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
-html {
-  color-scheme: dark;
-}
+/* ── Base ─────────────────────────────────────────────────── */
+html { color-scheme: dark; }
 
 body {
   background-color: var(--color-bg-base);
@@ -41,13 +90,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Scrollbar ─────────────────────────────────────────── */
+/* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-bg-base); }
 ::-webkit-scrollbar-thumb { background: var(--color-bg-subtle); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-accent-base); }
 
-/* ── Shiki code block overrides ────────────────────────── */
+/* ── Shiki / rehype-pretty-code ──────────────────────────── */
 .shiki,
 .shiki code {
   background-color: var(--color-bg-overlay) !important;
@@ -72,7 +121,7 @@ body {
   border-bottom: 1px solid var(--color-border);
 }
 
-/* ── Prose customisation ───────────────────────────────── */
+/* ── Prose content ───────────────────────────────────────── */
 .prose pre {
   background-color: var(--color-bg-overlay);
   border: 1px solid var(--color-border);
@@ -82,7 +131,7 @@ body {
 
 .prose code:not(pre code) {
   background: var(--color-bg-subtle);
-  color: var(--color-accent-pop);
+  color: var(--vauxhall-fg);       /* lavender, matching Vauxhall inline code */
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-family: var(--font-mono);
@@ -90,43 +139,37 @@ body {
 }
 
 .prose a {
-  color: var(--color-accent-bright);
+  color: var(--light-blue);
   text-decoration-color: transparent;
   transition: color 0.15s, text-decoration-color 0.15s;
 }
 .prose a:hover {
-  color: var(--color-accent-pop);
-  text-decoration-color: var(--color-accent-pop);
+  color: var(--cool-cyan);
+  text-decoration-color: var(--cool-cyan);
 }
 
 .prose blockquote {
-  border-left-color: var(--color-accent-base);
+  border-left-color: var(--vauxhall-fg);
   color: var(--color-text-secondary);
 }
 
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  color: var(--color-text-primary);
-  scroll-margin-top: 5rem;
-}
+/* Heading gradient: cyan → purple (Vauxhall signature) */
+.prose h1 { color: var(--h1-color); scroll-margin-top: 5rem; }
+.prose h2 { color: var(--h2-color); scroll-margin-top: 5rem; }
+.prose h3 { color: var(--h3-color); scroll-margin-top: 5rem; }
+.prose h4 { color: var(--h4-color); scroll-margin-top: 5rem; }
+.prose h5 { color: var(--h5-color); scroll-margin-top: 5rem; }
+.prose h6 { color: var(--h6-color); scroll-margin-top: 5rem; }
 
-.prose h2 a, .prose h3 a, .prose h4 a {
-  text-decoration: none;
-  color: inherit;
-}
-.prose h2 a:hover, .prose h3 a:hover, .prose h4 a:hover {
-  color: var(--color-accent-bright);
-}
+.prose h2 a, .prose h3 a, .prose h4 a { text-decoration: none; color: inherit; }
+.prose h2 a:hover, .prose h3 a:hover, .prose h4 a:hover { opacity: 0.8; }
 
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.prose thead tr {
-  border-bottom: 2px solid var(--color-border);
-}
-.prose tbody tr {
-  border-bottom: 1px solid var(--color-border);
-}
-.prose th, .prose td {
-  padding: 0.5rem 0.75rem;
-}
+.prose table { width: 100%; border-collapse: collapse; }
+.prose thead tr { border-bottom: 2px solid var(--color-border); }
+.prose tbody tr { border-bottom: 1px solid var(--color-border); }
+.prose th, .prose td { padding: 0.5rem 0.75rem; }
+
+.prose hr { border-color: var(--color-border); margin: 1.5rem 0; }
+
+/* Strong / em */
+.prose strong { color: var(--text-normal); }
