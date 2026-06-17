@@ -3,25 +3,130 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds — Vauxhall-inspired navy/purple scale */
+  --color-bg-base:       #0d0e17;
+  --color-bg-surface:    #13141f;
+  --color-bg-elevated:   #1a1b2e;
+  --color-bg-overlay:    #22243a;
+  --color-bg-subtle:     #2a2d4a;
+
+  /* Purple accent scale */
+  --color-accent-base:   #7c5cbf;
+  --color-accent-bright: #a78bfa;
+  --color-accent-pop:    #c4b5fd;
+  --color-accent-glow:   #ddd6fe;
+
+  /* Text */
+  --color-text-primary:   #e8e6f0;
+  --color-text-secondary: #a8a4bc;
+  --color-text-muted:     #6b6880;
+
+  /* Border */
+  --color-border: #2a2d4a;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* ── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb { background: var(--color-bg-subtle); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-base); }
+
+/* ── Shiki code block overrides ────────────────────────── */
+.shiki,
+.shiki code {
+  background-color: var(--color-bg-overlay) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+[data-rehype-pretty-code-figure] {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+[data-rehype-pretty-code-title] {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ── Prose customisation ───────────────────────────────── */
+.prose pre {
+  background-color: var(--color-bg-overlay);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+}
+
+.prose code:not(pre code) {
+  background: var(--color-bg-subtle);
+  color: var(--color-accent-pop);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.prose a {
+  color: var(--color-accent-bright);
+  text-decoration-color: transparent;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.prose a:hover {
+  color: var(--color-accent-pop);
+  text-decoration-color: var(--color-accent-pop);
+}
+
+.prose blockquote {
+  border-left-color: var(--color-accent-base);
+  color: var(--color-text-secondary);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--color-text-primary);
+  scroll-margin-top: 5rem;
+}
+
+.prose h2 a, .prose h3 a, .prose h4 a {
+  text-decoration: none;
+  color: inherit;
+}
+.prose h2 a:hover, .prose h3 a:hover, .prose h4 a:hover {
+  color: var(--color-accent-bright);
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.prose thead tr {
+  border-bottom: 2px solid var(--color-border);
+}
+.prose tbody tr {
+  border-bottom: 1px solid var(--color-border);
+}
+.prose th, .prose td {
+  padding: 0.5rem 0.75rem;
 }

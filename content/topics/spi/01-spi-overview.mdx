@@ -1,0 +1,90 @@
+---
+title: "SPI Overview"
+description: "What SPI is, how the 4-wire bus works, and when to choose SPI over UART or I2C."
+date: 2024-11-15
+tags: [spi, serial, protocols, synchronous]
+topic: spi
+order: 1
+difficulty: beginner
+---
+
+## SPI vs UART: The Key Difference
+
+UART is asynchronous — it reconstructs timing from the data itself. SPI takes a different approach: a dedicated **clock line** tells the receiver exactly when to sample each bit. This makes SPI faster and more reliable at high speeds.
+
+## The Four Wires
+
+SPI uses four signals:
+
+| Signal | Full Name | Direction |
+|--------|-----------|-----------|
+| SCLK | Serial Clock | Master → Slave |
+| MOSI | Master Out Slave In | Master → Slave |
+| MISO | Master In Slave Out | Slave → Master |
+| CS / SS | Chip Select / Slave Select | Master → Slave |
+
+The master always controls the clock. Data is exchanged simultaneously on MOSI and MISO — SPI is inherently full-duplex.
+
+## Clock Polarity and Phase (CPOL/CPHA)
+
+SPI has four *modes* based on two settings:
+
+- **CPOL** (Clock Polarity) — idle clock state: 0 = low, 1 = high
+- **CPHA** (Clock Phase) — when to sample: 0 = leading edge, 1 = trailing edge
+
+| Mode | CPOL | CPHA | Sample On |
+|------|------|------|-----------|
+| 0    | 0    | 0    | Rising edge |
+| 1    | 0    | 1    | Falling edge |
+| 2    | 1    | 0    | Falling edge |
+| 3    | 1    | 1    | Rising edge |
+
+**Mode 0 is the most common.** Always check your device datasheet — mismatched mode is the #1 SPI debugging problem.
+
+## Initiating a Transfer
+
+The master pulls CS low to select a slave, clocks out data on MOSI while simultaneously reading MISO, then releases CS high:
+
+```c
+#include "stm32f4xx_hal.h"
+
+extern SPI_HandleTypeDef hspi1;
+#define CS_PIN  GPIO_PIN_4
+#define CS_PORT GPIOA
+
+uint8_t spi_transfer(uint8_t tx_byte) {
+    uint8_t rx_byte;
+    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET); // CS low
+    HAL_SPI_TransmitReceive(&hspi1, &tx_byte, &rx_byte, 1, HAL_MAX_DELAY);
+    HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);   // CS high
+    return rx_byte;
+}
+```
+
+## Multiple Slaves
+
+Unlike I2C, SPI has no built-in addressing scheme. Each slave needs its own CS line:
+
+```
+Master
+  ├── SCLK ──────────┬────────────┐
+  ├── MOSI ──────────┼────────────┤
+  ├── MISO ──────────┼────────────┤
+  ├── CS0 ── Slave 0 │            │
+  └── CS1 ────────── Slave 1      │
+                          CS2 ── Slave 2
+```
+
+The master can only talk to one slave at a time (exactly one CS line low at once).
+
+## When to Choose SPI
+
+**Use SPI when you need:**
+- High throughput (10+ Mbps easily achievable)
+- Simple, deterministic timing
+- Communication with ADCs, DACs, displays, flash memory, SD cards
+
+**Don't use SPI when:**
+- You have many devices (too many CS pins)
+- You need to add devices without rewiring (use I2C)
+- Cable length is significant (SPI has no drive strength standard)

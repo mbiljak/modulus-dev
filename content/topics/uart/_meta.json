@@ -1,0 +1,4 @@
+{
+  "title": "UART",
+  "description": "Universal Asynchronous Receiver-Transmitter — the foundational serial protocol used everywhere from Arduino debugging to industrial sensors."
+}
