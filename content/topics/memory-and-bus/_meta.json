@@ -1,0 +1,4 @@
+{
+  "title": "Memory and Bus Interfaces",
+  "description": "ARM Cortex-M memory regions, bus matrix (AHB/APB), and bit-banding for atomic peripheral access."
+}

@@ -25,14 +25,14 @@ function getLessonFiles(topicSlug: string): string[] {
   if (!fs.existsSync(dir)) return []
   return fs
     .readdirSync(dir)
-    .filter((f) => f.endsWith('.mdx'))
+    .filter((f) => f.endsWith('.mdx') || f.endsWith('.md'))
     .sort()
 }
 
 export function getAllTopicSlugs(): string[] {
   if (!fs.existsSync(TOPICS_ROOT)) return []
   return fs.readdirSync(TOPICS_ROOT).filter((d) => {
-    return fs.statSync(path.join(TOPICS_ROOT, d)).isDirectory()
+    return !d.startsWith('.') && fs.statSync(path.join(TOPICS_ROOT, d)).isDirectory()
   })
 }
 
@@ -42,7 +42,7 @@ export function getLessonsForTopic(topicSlug: string): LessonMeta[] {
     const filePath = path.join(TOPICS_ROOT, topicSlug, filename)
     const raw = fs.readFileSync(filePath, 'utf-8')
     const { data, content } = matter(raw)
-    const lessonSlug = filename.replace(/\.mdx$/, '')
+    const lessonSlug = filename.replace(/\.mdx?$/, '')
     return {
       title: data.title ?? titleFromSlug(lessonSlug),
       description: data.description ?? '',
@@ -86,7 +86,9 @@ export function getAllLessons(): LessonMeta[] {
 }
 
 export async function getLessonBySlug(topicSlug: string, lessonSlug: string) {
-  const filePath = path.join(TOPICS_ROOT, topicSlug, `${lessonSlug}.mdx`)
+  const mdxPath = path.join(TOPICS_ROOT, topicSlug, `${lessonSlug}.mdx`)
+  const mdPath  = path.join(TOPICS_ROOT, topicSlug, `${lessonSlug}.md`)
+  const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath
   const raw = fs.readFileSync(filePath, 'utf-8')
 
   const { content, frontmatter } = await compileMDX<Omit<LessonMeta, 'slug' | 'readingTime' | 'topic'>>({

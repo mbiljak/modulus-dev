@@ -1,0 +1,4 @@
+{
+  "title": "C and Assembly Programming",
+  "description": "Mixed C and assembly coding using inline assembly, naked functions, and GCC attributes for embedded targets."
+}

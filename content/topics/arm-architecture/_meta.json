@@ -1,0 +1,4 @@
+{
+  "title": "ARM Cortex-M3/M4 Architecture",
+  "description": "Internal architecture of the ARM Cortex-M3 and M4 processors — registers, pipeline, modes, memory map, and bus interfaces."
+}
